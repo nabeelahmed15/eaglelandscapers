@@ -1,0 +1,259 @@
+@import "tailwindcss";
+
+/* ─── Premium Dark Design System ─────────────────────── */
+
+:root {
+  --text-primary: #f5f5f7;
+  --text-secondary: rgba(255, 255, 255, 0.55);
+  --text-tertiary: rgba(255, 255, 255, 0.3);
+  --bg-primary: #0a0a0a;
+  --bg-secondary: #111111;
+  --border: rgba(255, 255, 255, 0.08);
+  --accent: #4a9a52;
+  --accent-dark: #2E7D32;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: var(--bg-primary);
+  color: var(--text-primary);
+  font-family: var(--font-inter), -apple-system, BlinkMacSystemFont, 'Helvetica Neue', sans-serif;
+  font-weight: 400;
+  font-size: 17px;
+  line-height: 1.47;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
+  text-rendering: optimizeLegibility;
+}
+
+/* ── PREMIUM SMOOTH SCROLL ───────────────────────────── */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Hide scrollbar but allow scrolling */
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: rgba(255, 255, 255, 0.02);
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(74, 154, 82, 0.3);
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(74, 154, 82, 0.5);
+}
+
+/* ── SELECTION ─────────────────────────────────────────── */
+::selection {
+  background: rgba(74, 154, 82, 0.4);
+  color: #fff;
+}
+
+/* ── PREMIUM GLOW EFFECTS ─────────────────────────────── */
+.glow-green {
+  box-shadow: 0 0 40px rgba(74, 154, 82, 0.3);
+}
+
+.glow-green-subtle {
+  box-shadow: 0 0 20px rgba(74, 154, 82, 0.15);
+}
+
+/* ── TEXT GRADIENTS ───────────────────────────────────── */
+.text-gradient {
+  background: linear-gradient(135deg, #fff 0%, rgba(255,255,255,0.7) 50%, #fff 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.text-gradient-green {
+  background: linear-gradient(135deg, #4a9a52 0%, #2E7D32 50%, #4a9a52 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* ── PREMIUM BACKDROP BLUR ───────────────────────────── */
+.premium-blur {
+  backdrop-filter: blur(20px) saturate(180%);
+  -webkit-backdrop-filter: blur(20px) saturate(180%);
+}
+
+/* ── BORDER GLOW ──────────────────────────────────────── */
+.border-glow {
+  border: 1px solid rgba(74, 154, 82, 0.3);
+  box-shadow: 0 0 20px rgba(74, 154, 82, 0.1), inset 0 0 20px rgba(74, 154, 82, 0.05);
+}
+
+/* ── ANIMATION KEYFRAMES ──────────────────────────────── */
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-10px); }
+}
+
+@keyframes pulse-glow {
+  0%, 100% { 
+    box-shadow: 0 0 20px rgba(74, 154, 82, 0.3);
+  }
+  50% { 
+    box-shadow: 0 0 40px rgba(74, 154, 82, 0.5);
+  }
+}
+
+@keyframes shimmer {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+
+@keyframes gradient-shift {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+/* ── UTILITY CLASSES ──────────────────────────────────── */
+.animate-float {
+  animation: float 6s ease-in-out infinite;
+}
+
+.animate-pulse-glow {
+  animation: pulse-glow 3s ease-in-out infinite;
+}
+
+.animate-shimmer {
+  background: linear-gradient(90deg, transparent, rgba(74, 154, 82, 0.1), transparent);
+  background-size: 200% 100%;
+  animation: shimmer 3s infinite;
+}
+
+.animate-gradient {
+  background-size: 200% 200%;
+  animation: gradient-shift 8s ease infinite;
+}
+
+/* ── SERIF DISPLAY ─────────────────────────────────────── */
+.serif {
+  font-family: var(--font-playfair), Georgia, serif;
+}
+
+/* ── SECTION BASE ──────────────────────────────────────── */
+section {
+  position: relative;
+  width: 100%;
+}
+
+/* ── PINNED SECTIONS GPU BOOST ────────────────────────── */
+.pin-spacer {
+  contain: layout style;
+}
+
+[style*="will-change"] {
+  backface-visibility: hidden;
+}
+
+/* ── FORM PLACEHOLDERS (dark theme) ───────────────────── */
+input::placeholder,
+textarea::placeholder {
+  color: rgba(255, 255, 255, 0.25);
+}
+
+input:focus,
+textarea:focus {
+  outline: none;
+}
+
+/* ── RESPONSIVE GRID FALLBACK ─────────────────────────── */
+@media (max-width: 768px) {
+  .responsive-grid-2 {
+    grid-template-columns: 1fr !important;
+  }
+}
+
+/* ── PREMIUM BUTTONS ──────────────────────────────────── */
+.btn-primary {
+  background: linear-gradient(135deg, #4a9a52 0%, #2E7D32 100%);
+  border: none;
+  padding: 14px 32px;
+  border-radius: 50px;
+  color: #fff;
+  font-weight: 600;
+  font-size: 14px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.btn-primary::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+  transition: left 0.5s ease;
+}
+
+.btn-primary:hover::before {
+  left: 100%;
+}
+
+.btn-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 30px rgba(74, 154, 82, 0.4);
+}
+
+/* ── CARD HOVER EFFECTS ───────────────────────────────── */
+.card-premium {
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  border-radius: 16px;
+  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.card-premium:hover {
+  background: rgba(255, 255, 255, 0.05);
+  border-color: rgba(74, 154, 82, 0.3);
+  transform: translateY(-4px);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+}
+
+/* ── TEXT REVEAL ANIMATION ────────────────────────────── */
+.reveal-text {
+  clip-path: inset(0 0 100% 0);
+  transition: clip-path 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.reveal-text.revealed {
+  clip-path: inset(0 0 0 0);
+}
+
+/* ── NOISE TEXTURE OVERLAY ────────────────────────────── */
+.noise-overlay::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+  opacity: 0.03;
+  pointer-events: none;
+  z-index: 1;
+}

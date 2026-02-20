@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 60" fill="currentColor">
+  <circle cx="40" cy="30" r="12" fill="#062C1B"/>
+  <circle cx="40" cy="30" r="18" stroke="#062C1B" stroke-width="2" fill="none"/>
+  <text x="70" y="40" font-family="Arial, sans-serif" font-weight="bold" font-size="24" fill="#062C1B">SOLARIS</text>
+</svg>
