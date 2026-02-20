@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Eagle Landscapers</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            background: linear-gradient(135deg, #1a472a 0%, #2d5a3d 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            padding: 20px;
+        }
+        .container {
+            text-align: center;
+            max-width: 600px;
+        }
+        h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+        p {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+            opacity: 0.9;
+        }
+        .features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+            margin-top: 2rem;
+            text-align: left;
+        }
+        .feature {
+            background: rgba(255,255,255,0.1);
+            padding: 1.5rem;
+            border-radius: 12px;
+            backdrop-filter: blur(10px);
+        }
+        .feature h3 {
+            font-size: 1.1rem;
+            margin-bottom: 0.5rem;
+            color: #90EE90;
+        }
+        .feature p {
+            font-size: 0.95rem;
+            margin: 0;
+        }
+        .cta {
+            display: inline-block;
+            background: #4CAF50;
+            color: white;
+            padding: 1rem 2rem;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: bold;
+            margin-top: 2rem;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        .cta:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.3);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🦅 Eagle Landscapers</h1>
+        <p>Professional Landscaping Services</p>
+        
+        <div class="features">
+            <div class="feature">
+                <h3>🌿 Garden Design</h3>
+                <p>Beautiful garden designs tailored to your vision and space.</p>
+            </div>
+            <div class="feature">
+                <h3>🌳 Tree Services</h3>
+                <p>Professional tree trimming, removal, and maintenance.</p>
+            </div>
+            <div class="feature">
+                <h3>💧 Irrigation</h3>
+                <p>Smart irrigation systems for efficient water management.</p>
+            </div>
+            <div class="feature">
+                <h3>✨ Maintenance</h3>
+                <p>Regular maintenance services to keep your outdoor space pristine.</p>
+            </div>
+        </div>
+        
+        <a href="#" class="cta">Get a Free Quote</a>
+    </div>
+</body>
+</html>
