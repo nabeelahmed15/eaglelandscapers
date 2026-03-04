@@ -1,0 +1,559 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RakshaSetu - Tourist Safety App</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', sans-serif;
+            background: #0a0e17;
+            color: #f1f5f9;
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 480px;
+            margin: 0 auto;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .header .logo {
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(135deg, #4f46e5, #818cf8);
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 40px;
+            margin: 0 auto 15px;
+            box-shadow: 0 0 30px rgba(79, 70, 229, 0.4);
+        }
+
+        .header h1 {
+            font-size: 1.8rem;
+            margin-bottom: 5px;
+        }
+
+        .header p {
+            color: #94a3b8;
+        }
+
+        .card {
+            background: #131a2a;
+            border-radius: 20px;
+            padding: 25px;
+            margin-bottom: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.08);
+        }
+
+        .status {
+            text-align: center;
+            padding: 20px;
+            border-radius: 15px;
+            margin-bottom: 20px;
+        }
+
+        .status.safe {
+            background: rgba(16, 185, 129, 0.15);
+            border: 1px solid rgba(16, 185, 129, 0.3);
+        }
+
+        .status.warning {
+            background: rgba(245, 158, 11, 0.15);
+            border: 1px solid rgba(245, 158, 11, 0.3);
+        }
+
+        .status.sos {
+            background: rgba(239, 68, 68, 0.2);
+            border: 1px solid rgba(239, 68, 68, 0.4);
+            animation: sos-pulse 1s infinite;
+        }
+
+        .status .icon {
+            font-size: 3rem;
+            margin-bottom: 10px;
+        }
+
+        .status h2 {
+            font-size: 1.3rem;
+            margin-bottom: 5px;
+        }
+
+        .status p {
+            color: #94a3b8;
+            font-size: 0.9rem;
+        }
+
+        @keyframes sos-pulse {
+
+            0%,
+            100% {
+                box-shadow: 0 0 0 0 rgba(239, 68, 68, 0.4)
+            }
+
+            50% {
+                box-shadow: 0 0 20px 10px rgba(239, 68, 68, 0)
+            }
+        }
+
+        .location {
+            background: #0a0e17;
+            border-radius: 12px;
+            padding: 15px;
+            margin-bottom: 20px;
+        }
+
+        .location h3 {
+            color: #94a3b8;
+            font-size: 0.85rem;
+            margin-bottom: 10px;
+        }
+
+        .location .row {
+            display: flex;
+            justify-content: space-between;
+            padding: 8px 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .location .row:last-child {
+            border: none;
+        }
+
+        .location .label {
+            color: #64748b;
+        }
+
+        .location .value {
+            color: #10b981;
+            font-weight: bold;
+            font-family: monospace;
+        }
+
+        .btn {
+            width: 100%;
+            padding: 16px;
+            border: none;
+            border-radius: 12px;
+            font-size: 1rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.2s;
+            margin-bottom: 10px;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #4f46e5, #6366f1);
+            color: white;
+            box-shadow: 0 4px 15px rgba(79, 70, 229, 0.3);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(79, 70, 229, 0.4);
+        }
+
+        .btn-primary:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .btn-secondary {
+            background: #1a2235;
+            color: #f1f5f9;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .btn-secondary:hover {
+            background: #232d3f;
+        }
+
+        .sos-btn {
+            background: linear-gradient(135deg, #ef4444, #dc2626);
+            color: white;
+            font-size: 1.2rem;
+            padding: 20px;
+            letter-spacing: 1px;
+            box-shadow: 0 4px 20px rgba(239, 68, 68, 0.4);
+        }
+
+        .sos-btn:hover {
+            transform: scale(1.02);
+            box-shadow: 0 6px 25px rgba(239, 68, 68, 0.5);
+        }
+
+        .sos-btn:active {
+            transform: scale(0.98);
+        }
+
+        .sos-btn.sent {
+            background: linear-gradient(135deg, #10b981, #059669);
+            box-shadow: 0 0 30px rgba(16, 185, 129, 0.5);
+        }
+
+        .connection {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            padding: 12px;
+            background: #1a2235;
+            border-radius: 10px;
+            font-size: 0.85rem;
+            color: #94a3b8;
+        }
+
+        .status-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+        }
+
+        .status-dot.online {
+            background: #10b981;
+            box-shadow: 0 0 10px #10b981;
+        }
+
+        .status-dot.offline {
+            background: #ef4444;
+        }
+
+        .alert-msg {
+            display: none;
+            background: rgba(239, 68, 68, 0.15);
+            border: 1px solid rgba(239, 68, 68, 0.3);
+            border-radius: 10px;
+            padding: 15px;
+            margin-top: 15px;
+            text-align: center;
+        }
+
+        .alert-msg.show {
+            display: block;
+        }
+
+        .alert-msg .icon {
+            font-size: 1.5rem;
+        }
+
+        .alert-msg .text {
+            color: #ef4444;
+            font-weight: bold;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="header">
+            <div class="logo">🛡️</div>
+            <h1>RakshaSetu</h1>
+            <p>Smart Tourist Safety Monitoring</p>
+        </div>
+
+        <div class="card">
+            <div id="safetyStatus" class="status safe">
+                <div class="icon">✅</div>
+                <h2>You are Safe</h2>
+                <p>Within designated safe zone</p>
+            </div>
+
+            <div class="location">
+                <h3>📍 Current Location</h3>
+                <div class="row">
+                    <span class="label">Latitude</span>
+                    <span class="value" id="lat">--</span>
+                </div>
+                <div class="row">
+                    <span class="label">Longitude</span>
+                    <span class="value" id="lng">--</span>
+                </div>
+                <div class="row">
+                    <span class="label">Speed</span>
+                    <span class="value" id="speed">0 m/s</span>
+                </div>
+
+                <button id="startBtn" class="btn btn-primary">▶️ Start Tracking</button>
+                <button id="stopBtn" class="btn btn-secondary" disabled>⏹️ Stop Tracking</button>
+                <button id="sosBtn" class="btn sos-btn" disabled>🚨 EMERGENCY SOS</button>
+
+                <div id="alertMsg" class="alert-msg">
+                    <div class="icon">⚠️</div>
+                    <div class="text" id="alertText">Warning message</div>
+                </div>
+
+                <div class="connection">
+                    <span class="status-dot" id="connectionDot"></span>
+                    <span id="connectionText">Connecting...</span>
+                </div>
+
+                <script src="https://cdn.socket.io/4.7.2/socket.io.min.js"></script>
+                <script>
+                    // Connect to server
+                    const socket = io();
+
+                    // DOM elements
+                    const startBtn = document.getElementById('startBtn');
+                    const stopBtn = document.getElementById('stopBtn');
+                    const sosBtn = document.getElementById('sosBtn');
+                    const latEl = document.getElementById('lat');
+                    const lngEl = document.getElementById('lng');
+                    const speedEl = document.getElementById('speed');
+                    const safetyStatus = document.getElementById('safetyStatus');
+                    const connectionDot = document.getElementById('connectionDot');
+                    const connectionText = document.getElementById('connectionText');
+                    const alertMsg = document.getElementById('alertMsg');
+                    const alertText = document.getElementById('alertText');
+
+                    let isTracking = false;
+                    let watchId = null;
+                    let userId = 'TOURIST-' + Math.floor(Math.random() * 10000);
+
+                    // Connection status
+                    socket.on('connect', () => {
+                        connectionDot.className = 'status-dot online';
+                        connectionText.textContent = 'Connected to server';
+                        console.log('Connected to server');
+                    });
+
+                    socket.on('disconnect', () => {
+                        connectionDot.className = 'status-dot offline';
+                        connectionText.textContent = 'Disconnected';
+                    });
+
+                    // Registration confirmed
+                    socket.on('registered', (data) => {
+                        console.log('Registered:', data);
+                        alert('Tracking started! Your ID: ' + data.tourist.userId);
+                    });
+
+                    // Listen for alerts from server
+                    socket.on('alert', (alert) => {
+                        console.log('Alert received:', alert);
+                        if (alert.type === 'GEO_FENCE_BREACH') {
+                            showWarning('You have left the safe zone!');
+                            updateSafetyStatus('warning');
+                        }
+                    });
+
+                    // Listen for SOS confirmation
+                    socket.on('sosAlert', (alert) => {
+                        console.log('SOS confirmed by server:', alert);
+                    });
+
+                    // Start tracking
+                    startBtn.addEventListener('click', () => {
+                        if (!navigator.geolocation) {
+                            alert('GPS not supported in this browser. Using simulation mode.');
+                            simulateLocation();
+                            return;
+                        }
+
+                        // Register with server FIRST
+                        socket.emit('register', { userId: userId, name: 'Demo Tourist' });
+
+                        // Wait a moment for registration, then start GPS
+                        setTimeout(() => {
+                            watchId = navigator.geolocation.watchPosition(
+                                (position) => {
+                                    const { latitude, longitude } = position.coords;
+                                    const speed = position.coords.speed || 0;
+
+                                    latEl.textContent = latitude.toFixed(6);
+                                    lngEl.textContent = longitude.toFixed(6);
+                                    speedEl.textContent = speed.toFixed(2) + ' m/s';
+
+                                    // Send location to server
+                                    socket.emit('locationUpdate', {
+                                        lat: latitude,
+                                        lng: longitude,
+                                        speed: speed
+                                    });
+                                },
+                                (error) => {
+                                    console.error('GPS Error:', error.message);
+                                },
+                                { enableHighAccuracy: true, maximumAge: 3000 }
+                            );
+                        }, 500);
+
+                        isTracking = true;
+                        startBtn.disabled = true;
+                        stopBtn.disabled = false;
+                        sosBtn.disabled = false;
+                    });
+
+                    // Stop tracking
+                    stopBtn.addEventListener('click', () => {
+                        if (watchId) {
+                            navigator.geolocation.clearWatch(watchId);
+                            watchId = null;
+                        }
+                        socket.emit('stopTracking');
+                        isTracking = false;
+                        startBtn.disabled = false;
+                        stopBtn.disabled = true;
+                        sosBtn.disabled = true;
+                        updateSafetyStatus('safe');
+                    });
+
+                    // SOS Emergency Button - FIXED: Include current location
+                    sosBtn.addEventListener('click', () => {
+                        if (!isTracking) {
+                            alert('Please start tracking first');
+                            return;
+                        }
+
+                        console.log('Sending SOS alert...');
+
+                        // Get current location BEFORE sending SOS
+                        if (navigator.geolocation) {
+                            navigator.geolocation.getCurrentPosition(
+                                (position) => {
+                                    const { latitude, longitude } = position.coords;
+                                    
+                                    // Update display with fresh location
+                                    latEl.textContent = latitude.toFixed(6);
+                                    lngEl.textContent = longitude.toFixed(6);
+                                    
+                                    // Send SOS alert with CURRENT location
+                                    socket.emit('sosAlert', {
+                                        lat: latitude,
+                                        lng: longitude,
+                                        timestamp: Date.now()
+                                    });
+                                    
+                                    console.log('SOS sent with location:', latitude, longitude);
+                                    
+                                    // Visual feedback
+                                    sosBtn.classList.add('sent');
+                                    sosBtn.textContent = '✅ SOS SENT!';
+                                    updateSafetyStatus('sos');
+                                    alert('🚨 EMERGENCY SOS SENT! Help is on the way.');
+                                },
+                                (error) => {
+                                    console.error('Geolocation error:', error);
+                                    // Fallback: use displayed location values
+                                    const lat = parseFloat(latEl.textContent) || 20.60;
+                                    const lng = parseFloat(lngEl.textContent) || 79.00;
+                                    
+                                    // Send SOS with fallback location
+                                    socket.emit('sosAlert', {
+                                        lat: lat,
+                                        lng: lng,
+                                        timestamp: Date.now()
+                                    });
+                                    
+                                    console.log('SOS sent with fallback location:', lat, lng);
+                                    
+                                    // Visual feedback
+                                    sosBtn.classList.add('sent');
+                                    sosBtn.textContent = '✅ SOS SENT!';
+                                    updateSafetyStatus('sos');
+                                    alert('🚨 EMERGENCY SOS SENT! (with last known location)');
+                                },
+                                {
+                                    enableHighAccuracy: true,
+                                    timeout: 5000,
+                                    maximumAge: 0
+                                }
+                            );
+                        } else {
+                            // Fallback for browsers without geolocation
+                            const lat = parseFloat(latEl.textContent) || 20.60;
+                            const lng = parseFloat(lngEl.textContent) || 79.00;
+                            
+                            socket.emit('sosAlert', {
+                                lat: lat,
+                                lng: lng,
+                                timestamp: Date.now()
+                            });
+                            
+                            // Visual feedback
+                            sosBtn.classList.add('sent');
+                            sosBtn.textContent = '✅ SOS SENT!';
+                            updateSafetyStatus('sos');
+                            alert('🚨 EMERGENCY SOS SENT! Help is on the way.');
+                        }
+
+                        setTimeout(() => {
+                            sosBtn.classList.remove('sent');
+                            sosBtn.textContent = '🚨 EMERGENCY SOS';
+                        }, 5000);
+                    });
+
+                    // Update safety status display
+                    function updateSafetyStatus(status) {
+                        if (status === 'safe') {
+                            safetyStatus.className = 'status safe';
+                            safetyStatus.innerHTML = '<div class="icon">✅</div><h2>You are Safe</h2><p>Within designated safe zone</p>';
+                        } else if (status === 'warning') {
+                            safetyStatus.className = 'status warning';
+                            safetyStatus.innerHTML = '<div class="icon">⚠️</div><h2>Warning!</h2><p>You have left the safe zone</p>';
+                        } else if (status === 'sos') {
+                            safetyStatus.className = 'status sos';
+                            safetyStatus.innerHTML = '<div class="icon">🚨</div><h2>SOS Sent!</h2><p>Help is on the way</p>';
+                        }
+                    }
+
+                    // Show warning message
+                    function showWarning(message) {
+                        alertText.textContent = message;
+                        alertMsg.classList.add('show');
+                        setTimeout(() => {
+                            alertMsg.classList.remove('show');
+                        }, 10000);
+                    }
+
+                    // Simulate location for demo (when GPS not available)
+                    function simulateLocation() {
+                        // Register first
+                        socket.emit('register', { userId: userId, name: 'Demo Tourist' });
+
+                        // Randomize starting location slightly so multiple test users don't overlap
+                        let baseLat = 20.60 + (Math.random() - 0.5) * 0.05;
+                        let baseLng = 79.00 + (Math.random() - 0.5) * 0.05;
+
+                        isTracking = true;
+                        startBtn.disabled = true;
+                        stopBtn.disabled = false;
+                        sosBtn.disabled = false;
+
+                        setInterval(() => {
+                            if (isTracking) {
+                                baseLat += (Math.random() - 0.5) * 0.002;
+                                baseLng += (Math.random() - 0.5) * 0.002;
+                                const speed = Math.random() * 3;
+
+                                latEl.textContent = baseLat.toFixed(6);
+                                lngEl.textContent = baseLng.toFixed(6);
+                                speedEl.textContent = speed.toFixed(2) + ' m/s';
+
+                                socket.emit('locationUpdate', {
+                                    lat: baseLat,
+                                    lng: baseLng,
+                                    speed: speed
+                                });
+                            }
+                        }, 3000);
+                    }
+                </script>
+</body>
+
+</html>
+
